@@ -17,7 +17,9 @@ const addUserUseCase = ({ encrypt, generateId }) => {
         await UserModel.create({
             ...info,
             _id:id,
-            password: encrypt(info.password)
+            password: encrypt(info.password), 
+            dateTimeCreated: Date.now(),
+            dateTimeUpdated: Date.now(),
         })
         return {
             msg: `User ${userEntity.getFirstname()} added successfully`,

@@ -39,6 +39,15 @@ const schema = new Schema(
       type: Date,
       default: null,
     },
+    dateTimeCreated: {
+      type: Date,
+      required: true,
+    },
+    dateTimeUpdated: {
+      type: Date,
+      required: true,
+    },
+
   },
   { toJSON, _id: false },
 );
