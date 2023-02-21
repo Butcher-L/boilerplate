@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { ExpressCallback } = require('../../express-callback');
+const { ExpressCallback } = require('../../middlewares/express-callback');
 const { loginController } = require('../../controllers/login');
 
 
