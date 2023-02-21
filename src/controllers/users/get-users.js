@@ -16,7 +16,7 @@ const getUsersController = ({ getUsersUseCase }) => {
                 "Content-Type": "application/json",
                 "Last-Modified": new Date(fetched.modifiedOn).toUTCString()
               },
-              statusCode: 201,
+              statusCode: 200,
               body: { fetched }
             };
 

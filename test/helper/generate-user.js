@@ -13,7 +13,9 @@ module.exports = {
       username: chance.first(),
       password: chance.word(),
       email: chance.email(),
-      dateOfBirth:chance.birthday({string: true})
+      dateOfBirth:chance.birthday({string: true}),
+      dateTimeCreated: Date.now(),
+      dateTimeUpdated: Date.now(),
     }
   },
 }
