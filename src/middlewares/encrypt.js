@@ -1,9 +1,10 @@
+require("dotenv").config();
 const crypto = require('crypto'),
-  algorithm = "aes-256-gcm",
-  password = "3zTvzr3p67VC61jmV54rIYu1545x4TlY",
+  algorithm = process.env.ALGORITHM,
+  password = process.env.PASSWORD,
   // do not use a global iv for production,
   // generate a new one for each encryption
-  iv = "60iP0h6vJoEa";
+  iv = process.env.IV;
 
 function encrypt(text) {
   var cipher = crypto.createCipheriv(algorithm, password, iv);
