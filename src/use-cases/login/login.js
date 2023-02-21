@@ -1,8 +1,6 @@
 const UserModel = require('../../models/users/user-db') 
-const jwt = require('../../middlewares/jwt')
 
-
-const loginUseCase = ({ encrypt }) => {
+const loginUseCase = ({ encrypt ,jwt }) => {
   return async function login(info){
 
     const userExist = await UserModel.findOne({
