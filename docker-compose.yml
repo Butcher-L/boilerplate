@@ -1,0 +1,30 @@
+version: '3'
+services:
+  boiler_dev:
+    image: mongo
+    container_name: boiler_dev
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: boiler_dev
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./mongo/dev:/data/db
+
+  boiler_test:
+    image: mongo
+    container_name: boiler_test
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: boiler_test
+    ports:
+      - "27019:27017"
+    volumes:
+      - ./mongo/test:/data/db
+  # mongodb:
+  #   image: mongo
+  #   container_name: mongodb
+  #   ports:
+  #     - "27018:27017"
+  #   volumes:
+  #     - ./data:/data/db
