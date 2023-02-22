@@ -1,11 +1,5 @@
 const jwt = require('jsonwebtoken');
-
-async function makeToken(employeeId) {
-  const token = await jwt.sign({ employeeId }, 'secret');
-  return token;
-}
-
-const employeeDb = require('../data-access/employees/');
+const config = require('./config')
 
 async function getAuthorization(req, res, next) {
   const bearerHeader = req.headers['authorization'];
@@ -20,19 +14,32 @@ async function getAuthorization(req, res, next) {
   }
 }
 
-async function verifyToken(token, key, employee_id) {
-  return await jwt.verify(token, key, async (err, authData) => {
-    if (err) {
-      return false;
-    } else {
-      const tokenExist = await employeeDb.checkToken(employee_id, token);
-      if (!tokenExist.rowCount) {
-        return false;
-      }
-
-      return true;
+async function verifyToken(req, res, next) {
+  let token = req.headers['x-access-token'] || req.headers['authorization'];
+  if (token) {
+    if (token.startsWith('Bearer ')) {
+      token = token.slice(7, token.length);
     }
-  });
+    jwt.verify(token, config.secret, (err, decoded) => {
+      if (err) {
+        console.log("Token Expired!")
+
+        return res.status(200).json({
+          success: false,
+          message: 'Token is not valid',
+          error: err.toString()
+        });
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return res.status(200).json({
+      success: false,
+      message: 'Auth token is not supplied'
+    });
+  }
 }
 
 async function verifyTokenUpload(token, key) {
@@ -46,7 +53,6 @@ async function verifyTokenUpload(token, key) {
 }
 
 module.exports = {
-  makeToken,
   getAuthorization,
   verifyToken,
   verifyTokenUpload

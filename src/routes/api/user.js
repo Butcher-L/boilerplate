@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ExpressCallback } = require('../../middlewares/express-callback');
-const { verifytoken } = require('../../middlewares/middleware')
+const { verifyToken } = require('../../middlewares/token')
 
 const {
     addUserController,
@@ -9,7 +9,7 @@ const {
 } = require('../../controllers/users');
 
 router.post('/add-user', ExpressCallback(addUserController));
-router.get('/', verifytoken ,ExpressCallback(getUsersController));
+router.get('/', verifyToken ,ExpressCallback(getUsersController));
 
 
 
