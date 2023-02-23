@@ -1,23 +1,24 @@
-const getUsersController = ({ getUsersUseCase }) => {
+const updateUserController = ({ updateUserUseCase }) => {
   return async function post(httpRequest){
       try{
           const {source = {}, ...info} = httpRequest.body;
           source.ip = httpRequest.ip;
           source.browser = httpRequest.headers["User-Agent"];
-          const query = httpRequest.query
 
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
-          };
-          const fetched = await getUsersUseCase(query);
+          };          
+
+          const id = httpRequest.params.id
+          const posted = await updateUserUseCase(id,info);
 
           return {
               headers: {
                 "Content-Type": "application/json",
-                "Last-Modified": new Date(fetched.modifiedOn).toUTCString()
+                "Last-Modified": new Date(posted.modifiedOn).toUTCString()
               },
               statusCode: 200,
-              body: fetched 
+              body: posted 
             };
 
       } catch(err){
@@ -33,7 +34,7 @@ const getUsersController = ({ getUsersUseCase }) => {
           }
           };
       };
-  };
-};
+  }; 
+}
 
-module.exports = getUsersController;
+module.exports = updateUserController;

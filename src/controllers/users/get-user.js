@@ -1,15 +1,16 @@
-const getUsersController = ({ getUsersUseCase }) => {
-  return async function post(httpRequest){
+const getUserController = ({ getUserUseCase }) => {
+  return async function get(httpRequest){
       try{
-          const {source = {}, ...info} = httpRequest.body;
+          const {source = {}} = httpRequest.body;
           source.ip = httpRequest.ip;
           source.browser = httpRequest.headers["User-Agent"];
-          const query = httpRequest.query
 
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
-          };
-          const fetched = await getUsersUseCase(query);
+          };          
+
+          const id = httpRequest.params.id
+          const fetched = await getUserUseCase(id);
 
           return {
               headers: {
@@ -33,7 +34,7 @@ const getUsersController = ({ getUsersUseCase }) => {
           }
           };
       };
-  };
-};
+  }; 
+}
 
-module.exports = getUsersController;
+module.exports = getUserController;
