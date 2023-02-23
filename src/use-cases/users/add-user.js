@@ -1,7 +1,7 @@
-const UserModel = require('../../models/users/user-db')
+const UserModel = require('../../models/user-db')
 const { makeUser } = require("../../entities/users")
 
-const addUserUseCase = ({ encrypt, generateId }) => {
+const addUserUseCase = ({ encrypt, generateId , Prefix}) => {
     return async function add(info){
         const userEntity = makeUser(info);
         const user = await UserModel.findOne({
@@ -9,10 +9,18 @@ const addUserUseCase = ({ encrypt, generateId }) => {
             lastname : info.lastname
         })
         if(user){
-            throw new Error('account already exists')
+            throw new Error('Account already exists')
         }
+        const username = await UserModel.findOne({
+            username : info.username,
+        })
 
-        const id = generateId('usr')
+        if(username){
+            throw new Error('username already exists')
+        }
+    
+
+        const id = generateId(Prefix.User)
 
         await UserModel.create({
             ...info,

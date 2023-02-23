@@ -1,10 +1,10 @@
 const Chance = require('chance');
-const { generateId } = require('../../src/middlewares/generateId')
+const { generateId, Prefix } = require('../../src/middlewares/generateId')
 
 const chance = new Chance()
 module.exports = {
    generateUser() {
-    const id = generateId('usr');
+    const id = generateId(Prefix.User);
     return {
       _id: id,
       firstname: chance.first(),

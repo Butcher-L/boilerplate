@@ -2,7 +2,7 @@ const chai = require('chai');
 const {expect} = require('chai');
 const chaiHttp = require('chai-http');
 
-const UserModel = require('../../src/models/users/user-db');
+const UserModel = require('../../src/models/user-db');
 const {generateUser} = require('../helper/generate-user')
 const server = require('../../src/index');
 const { encrypt } = require('../../src/middlewares/encrypt'); 

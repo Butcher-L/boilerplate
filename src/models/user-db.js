@@ -1,7 +1,7 @@
 const  { Schema } = require('mongoose');
 const Mongoose = require('mongoose');
 
-const  mongooseUtil = require('../../middlewares/mongo/mongoose')
+const  mongooseUtil = require('../middlewares/mongo/mongoose')
 
 const { toJSON } = mongooseUtil;
 

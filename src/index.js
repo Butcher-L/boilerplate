@@ -7,6 +7,7 @@ const { MongooseService } = require('./middlewares/mongo/mongoose');
 
 const loginRouter = require('./routes/api/login')
 const usersRouter = require('./routes/api/user');
+const transactionRouter = require('./routes/api/transactions')
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
+app.use('/transactions', transactionRouter);
 
 const PORT = process.env.PORT || 3000;
 

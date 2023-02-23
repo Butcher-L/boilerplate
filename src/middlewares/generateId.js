@@ -1,8 +1,9 @@
 const { v4 } = require('uuid');
 
 // list of prefix
-const _prefix = {
-  ["User"]: 'usr',
+const Prefix = {
+  User: 'usr',
+  Transaction: 'trn'
 };
 
 function generateId(prefix, uuid) {
@@ -15,4 +16,4 @@ function generateId(prefix, uuid) {
   return `${prefix}_${id.split('-').join('')}`;
 }
 
-module.exports = { generateId }
+module.exports = { generateId, Prefix }

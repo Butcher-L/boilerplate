@@ -2,7 +2,7 @@ const chai = require('chai');
 const {expect} = require('chai');
 const chaiHttp = require('chai-http');
 
-const UserModel = require('../../src/models/users/user-db');
+const UserModel = require('../../src/models/user-db');
 const {generateUser} = require('../helper/generate-user')
 const server = require('../../src/index');
 
@@ -41,7 +41,7 @@ describe('Users', () => {
             .send(this.user)
 
         expect(res.status).to.be.eqls(400)
-        expect(res.body.error).to.be.eqls('account already exists')
+        expect(res.body.error).to.be.eqls('Account already exists')
     });
   });
 });

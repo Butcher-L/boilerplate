@@ -2,7 +2,7 @@ const chai = require('chai');
 const {expect} = require('chai');
 const chaiHttp = require('chai-http');
 
-const UserModel = require('../../src/models/users/user-db');
+const UserModel = require('../../src/models/user-db');
 const {generateUser} = require('../helper/generate-user')
 const server = require('../../src/index');
 const jwt = require('../../src/middlewares/jwt')
@@ -23,7 +23,7 @@ describe('Users', () => {
 
     it('SHOULD delete user successfully', async function (){
         const res = await chai.request(server)
-            .delete(`/users/${this.user._id}`)
+            .delete(`/users/delete/${this.user._id}`)
             .set('Authorization', 'Bearer ' +  this.token)
         expect(res.status).to.be.eqls(200)
     });

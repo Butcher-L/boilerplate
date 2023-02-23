@@ -3,7 +3,7 @@ const {expect} = require('chai');
 const chaiHttp = require('chai-http');
 const R = require('ramda')
 
-const UserModel = require('../../src/models/users/user-db');
+const UserModel = require('../../src/models/user-db');
 const {generateUser} = require('../helper/generate-user')
 const server = require('../../src/index');
 const jwt = require('../../src/middlewares/jwt')

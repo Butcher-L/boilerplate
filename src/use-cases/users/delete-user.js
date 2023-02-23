@@ -1,4 +1,4 @@
-const UserModel = require('../../models/users/user-db')
+const UserModel = require('../../models/user-db')
 
 const deleteUserUseCase = () => {
   return async function get(id){
