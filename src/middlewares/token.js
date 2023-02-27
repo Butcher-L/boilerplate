@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('./config')
+require("dotenv").config();
 
 async function getAuthorization(req, res, next) {
   const bearerHeader = req.headers['authorization'];
@@ -20,7 +20,7 @@ async function verifyToken(req, res, next) {
     if (token.startsWith('Bearer ')) {
       token = token.slice(7, token.length);
     }
-    jwt.verify(token, config.secret, (err, decoded) => {
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
         console.log("Token Expired!")
 

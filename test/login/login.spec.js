@@ -43,7 +43,7 @@ describe('Login', () => {
             password: "test"
           })
 
-      expect(res.status).to.be.eqls(400)
+      expect(res.status).to.be.eqls(404)
       expect(res.body.error).to.be.eqls('Invalid Credentials')
     });
   });

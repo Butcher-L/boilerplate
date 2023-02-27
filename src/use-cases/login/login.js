@@ -26,6 +26,7 @@ const loginUseCase = ({ encrypt ,jwt }) => {
 
     return {
         message : 'Login successful',
+        statusCode: 200,
         token: token,
     };
 };
