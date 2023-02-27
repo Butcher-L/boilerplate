@@ -16,7 +16,10 @@ const loginUseCase = ({ encrypt ,jwt }) => {
     })
 
     if(!user){
-        throw new Error('Invalid Credentials')
+        return{
+            error: "Invalid Credentials",
+            statusCode: 404,
+        }
     }
 
     const token = await jwt.generateToken(user)

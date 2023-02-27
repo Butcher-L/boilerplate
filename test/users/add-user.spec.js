@@ -36,6 +36,19 @@ describe('Users', () => {
     });
 
     it('SHOULD give error ', async function (){
+        const username = "test 1"
+        const res =  await chai.request(server)
+            .post('/users/add-user')
+            .send({
+                ...this.user,
+                username
+            })
+
+        expect(res.status).to.be.eqls(400)
+        expect(res.body.error).to.be.eqls(`Username should not have 'space'`)
+    });
+
+    it('SHOULD give error ', async function (){
         const res =  await chai.request(server)
             .post('/users/add-user')
             .send(this.user)

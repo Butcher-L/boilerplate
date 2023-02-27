@@ -16,7 +16,6 @@ const loginController = ({ loginUseCase }) => {
                 "Content-Type": "application/json",
                 "Last-Modified": new Date(fetched.modifiedOn).toUTCString()
               },
-              statusCode: 200,
               body: fetched 
             };
 

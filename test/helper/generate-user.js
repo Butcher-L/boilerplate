@@ -8,7 +8,7 @@ module.exports = {
     return {
       _id: id,
       firstname: chance.first(),
-      lastname: chance.last(),
+      lastname: chance.last(), 
       role: "test",
       username: chance.first(),
       password: chance.word(),

@@ -9,7 +9,7 @@ const deleteUser = require('./delete-user')
 
 const addUserUseCase = addUser({ encrypt, generateId, Prefix });
 const getUsersUseCase = getUsers();
-const updateUserUseCase = updateUser();
+const updateUserUseCase = updateUser({encrypt});
 const getUserUseCase = getUser();
 const deleteUserUseCase = deleteUser();
 

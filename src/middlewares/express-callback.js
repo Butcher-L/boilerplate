@@ -4,9 +4,6 @@ const ExpressCallback = controller => {
         body: req.body,
         query: req.query,
         params: req.params,
-        ip: req.ip,
-        method: req.method,
-        path: req.path,
         file: req.files, // for upload image
         headers: {
           "SessionId": req.get("SessionId"),

@@ -17,15 +17,23 @@ describe('Transactons', () => {
   describe('/PUT ', () => {
     before(async function () { 
       this.transaction = generateTransaction()
+      this.transaction2 = generateTransaction()
       this.user = generateUser()
       this.name = "TEST"
 
       await UserModel.create(this.user)
-      await TransactonModel.create({
-        ...this.transaction,
-        status: Transaction.Todo,
-        user: this.user._id
-      })
+      await TransactonModel.insertMany([
+        {
+          ...this.transaction,
+          status: Transaction.Todo,
+          user: this.user._id
+        },
+        {
+          ...this.transaction2,
+          status: Transaction.Todo,
+          user: this.user._id
+        },
+      ])
 
       this.token = await jwt.generateToken(this.user)
     });
@@ -49,6 +57,17 @@ describe('Transactons', () => {
     it('SHOULD name match with the updated name in the model', async function (){
       const transaction = await TransactonModel.findById(this.transaction._id)
       expect(transaction.name).to.be.eqls(this.name)
+    });
+
+    it('SHOULD not update due to existing name', async function (){
+      const res = await chai.request(server)
+        .put(`/transactions/update/${this.transaction._id}`)
+        .set('Authorization', 'Bearer ' +  this.token)
+        .send({ name: this.transaction2.name })
+
+        console.log(res.body)
+      expect(res.status).to.be.eqls(400)
+      expect(res.body.error).to.be.eqls('Transaction name already exists')
     });
 
     it('SHOULD not accept invalid status', async function (){

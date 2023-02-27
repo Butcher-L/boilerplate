@@ -15,8 +15,13 @@ const makeUserEntity = ({}) => {
             throw new Error('User must have role');
         }
 
-        if(!username){
-            throw new Error('User must have username');
+        if(username){
+            if(!username){
+                throw new Error('User must have username');
+            }
+            if (username.includes(' ')){
+                throw new Error(`Username should not have 'space'`)
+            }
         }
 
         if(!password){

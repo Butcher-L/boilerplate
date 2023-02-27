@@ -16,6 +16,16 @@ const updateTransactionUseCase = ({ TransactionType }) => {
         }
       }
 
+      if(info.name){
+        const transaction = await TransactionModel.findOne({
+          ...R.pick(['name'],info)
+        })
+
+        if(transaction){
+          throw new Error('Transaction name already exists')
+        }
+      }
+
       await TransactionModel.findByIdAndUpdate(
         {
           _id: id,

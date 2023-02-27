@@ -1,10 +1,33 @@
+const R = require('ramda')
 const UserModel = require('../../models/user-db')
 
-const updateUserUseCase = () => {
+const updateUserUseCase = ({encrypt}) => {
     return async function add(id,info){
-      const userExists = await UserModel.findOne({_id:id})
+
+      const userExists = await UserModel.findOne({_id: id})
+
       if(!userExists){
           throw new Error('Account does not exists')
+      }
+
+      if(info.username){
+        const user = await UserModel.findOne({
+          ...R.pick(['username'],info)
+        })
+
+        if(user){
+          throw new Error('User name already exists')
+        }
+
+        if (info.username.includes(' ')){
+          throw new Error(`Username should not have 'space'`)
+      }
+
+      }
+
+      const data = {
+        ...info,
+        ...info.password ? {password :encrypt(info.password)} : {}
       }
 
       await UserModel.findByIdAndUpdate(
@@ -13,7 +36,7 @@ const updateUserUseCase = () => {
         },
         {
           $set:{
-            ...info,
+            ...data,
             dateTimeUpdated: Date.now()
           }
         })

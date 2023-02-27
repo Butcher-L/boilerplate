@@ -5,7 +5,10 @@ const getUsersUseCase = () => {
 
     const {first, order, next} = info
 
-      return UserModel.find({}).skip(next).limit(first).sort({dateTimeCreated:order});
+      return UserModel.find({})
+      .skip(next)
+      .limit(first)
+      .sort({dateTimeCreated:order});
   };
 };
 
