@@ -1,8 +1,9 @@
 const TransactionModel = require('../../models/transaction-db')
 const R = require('ramda')
 
-const updateTransactionUseCase = ({ TransactionType }) => {
+const updateTransactionUseCase = ({ TransactionType, Transaction }) => {
     return async function add(id,info){
+   
       const transactionExists = await TransactionModel.findOne({_id:id})
       if(!transactionExists){
         throw new Error('Transaction does not exists')
@@ -24,6 +25,16 @@ const updateTransactionUseCase = ({ TransactionType }) => {
         if(transaction){
           throw new Error('Transaction name already exists')
         }
+      }
+
+      if(info.dateTimeStarted || info.dateTimeCompleted ){
+        if(info.dateTimeStarted > info.dateTimeCompleted){
+          throw new Error('Date Started should not be greater than Date Completed')
+        }
+      }
+
+      if(info.status === Transaction.Done){
+        info.dateTimeCompleted = Date.now()
       }
 
       await TransactionModel.findByIdAndUpdate(

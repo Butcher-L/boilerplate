@@ -4,14 +4,13 @@ const chaiHttp = require('chai-http');
 
 const UserModel = require('../../src/models/user-db');
 const TransactionModel = require('../../src/models/transaction-db')
-const { Transaction } = require('../../src/middlewares/types')
+const { Transaction, Role } = require('../../src/middlewares/types')
 
 const { generateUser } = require('../helper/generate-user')
 const { generateTransaction} = require('../helper/generate-transaction')
 
 const server = require('../../src/index');
 const jwt = require('../../src/middlewares/jwt')
-const { generateId, Prefix } = require('../../src/middlewares/generateId')
 
 
 chai.use(chaiHttp);
@@ -20,10 +19,15 @@ describe('Transactions', () => {
   describe('/DELETE ', () => {
     before(async function () { 
         this.transaction = generateTransaction()
-        this.user = generateUser()
+        this.user = generateUser(Role.User)
+        this.admin = generateUser(Role.Admin)
 
         await UserModel.create(this.user)
-        this.token = await jwt.generateToken(this.user)
+        await UserModel.create(this.admin)
+
+        this.token = await jwt.generateToken(this.admin)
+        this.invalidToken = await jwt.generateToken(this.user)
+
 
         await TransactionModel.create({
           ...this.transaction,
@@ -37,14 +41,14 @@ describe('Transactions', () => {
 
       });
     it('SHOULD give error in delete transaction', async function (){
-        const user = generateId(Prefix.User)
         const res = await chai.request(server)
             .delete(`/transactions/delete/${this.transaction._id}`)
             .send({
-              user
+              user:this.user._id
           })
-            .set('Authorization', 'Bearer ' +  this.token)
+            .set('Authorization', 'Bearer ' +  this.invalidToken)
         expect(res.status).to.be.eqls(400)
+        expect(res.body.error).to.be.eqls('No access to delete transaction')
     });
 
     it('SHOULD delete transaction successfully', async function (){
@@ -54,13 +58,8 @@ describe('Transactions', () => {
               user: this.user._id
           })
             .set('Authorization', 'Bearer ' +  this.token)
+        
         expect(res.status).to.be.eqls(200)
-    });
-
-    it('SHOULD delete the transaction in the model', async function (){
-      const transaction = await TransactionModel.findById(this.transaction._id)
-
-      expect(transaction).to.be.null
     });
   });
 });

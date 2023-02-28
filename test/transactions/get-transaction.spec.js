@@ -7,7 +7,7 @@ const UserModel = require('../../src/models/user-db');
 
 const { generateTransaction } = require('../helper/generate-transaction')
 const { generateUser } = require('../helper/generate-user')
-const { Transaction } = require('../../src/middlewares/types')
+const { Transaction, Role } = require('../../src/middlewares/types')
 
 
 const server = require('../../src/index');
@@ -19,7 +19,7 @@ describe('Transactons', () => {
   describe('/GET ', () => {
     before(async function () { 
         this.transaction = generateTransaction()
-        this.user = generateUser()
+        this.user = generateUser(Role.User)
 
         await UserModel.create(this.user)
         this.token = await jwt.generateToken(this.user)

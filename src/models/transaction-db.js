@@ -22,6 +22,17 @@ const schema = new Schema(
     status: {
       type: String,
     },
+    deleted: {
+      default: false,
+    },
+    dateTimeStarted: {
+      type: Date,
+      default: null
+    },
+    dateTimeCompleted: {
+      type: Date,
+      default: null
+    },
     dateTimeCreated: {
       type: Date,
       required: true,

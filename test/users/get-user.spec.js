@@ -3,6 +3,7 @@ const {expect} = require('chai');
 const chaiHttp = require('chai-http');
 
 const UserModel = require('../../src/models/user-db');
+const { Role } = require('../../src/middlewares/types')
 const {generateUser} = require('../helper/generate-user')
 const server = require('../../src/index');
 const jwt = require('../../src/middlewares/jwt')
@@ -12,7 +13,7 @@ chai.use(chaiHttp);
 describe('Users', () => {
   describe('/GET ', () => {
     before(async function () { 
-        this.user = generateUser()
+        this.user = generateUser(Role.User)
         await UserModel.create(this.user)
 
         this.token = await jwt.generateToken(this.user)

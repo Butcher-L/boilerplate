@@ -1,18 +1,21 @@
 const TransactionModel = require('../../models/transaction-db')
 
-const deleteTransactionUseCase = () => {
-  return async function get(id, info){
-
-    const transaction = await TransactionModel.findOne({
-      _id: id,
-      user: info.user
-    })
-
-    if(!transaction) {
-      throw new Error('Not Authorize to delete')
+const deleteTransactionUseCase = ({Role}) => {
+  return async function get(id, user){
+    if(user.role === Role.User){
+      throw new Error('No access to delete transaction')
     }
 
-      return TransactionModel.deleteOne({_id: id})
+      await TransactionModel.updateOne(
+        { _id: id },
+        {
+            deleted: true
+        })
+      
+    return {
+      msg: `Transaction ${id} is deleted`,
+      id
+    };
   };
 };
 

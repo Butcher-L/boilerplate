@@ -5,7 +5,7 @@ const R = require('ramda')
 
 const UserModel = require('../../src/models/user-db');
 const TransactionModel = require('../../src/models/transaction-db')
-const { Transaction } = require('../../src/middlewares/types')
+const { Transaction, Role } = require('../../src/middlewares/types')
 const {generateUser} = require('../helper/generate-user')
 const {generateTransaction} = require('../helper/generate-transaction')
 
@@ -17,7 +17,7 @@ chai.use(chaiHttp);
 describe('Transactions', () => {
   describe('/GET ', () => {
     before(async function () { 
-        this.user = generateUser()
+        this.user = generateUser(Role.User)
         const transactions = R.times(() => ({
           ...generateTransaction(),
           status: Transaction.Todo,

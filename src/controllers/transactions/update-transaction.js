@@ -7,10 +7,10 @@ const updateTransactionController = ({ updateTransactionUseCase }) => {
 
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
-          };          
-
+          };       
+          const user = httpRequest.user
           const id = httpRequest.params.id
-          const posted = await updateTransactionUseCase(id,info);
+          const posted = await updateTransactionUseCase(id,info,user);
 
           return {
               headers: {

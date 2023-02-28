@@ -5,6 +5,8 @@ const R = require('ramda')
 
 const TransactonModel = require('../../src/models/transaction-db')
 const UserModel = require('../../src/models/user-db');
+const { Role } = require('../../src/middlewares/types')
+
 const { generateTransaction } = require('../helper/generate-transaction')
 const { generateUser } = require('../helper/generate-user')
 const jwt = require('../../src/middlewares/jwt')
@@ -18,7 +20,7 @@ describe('Transactons', () => {
   describe('/POST ', () => {
     before(async function () { 
         this.transaction = generateTransaction()
-        this.user = generateUser()
+        this.user = generateUser(Role.User)
         await UserModel.create(this.user)
         this.token = await jwt.generateToken(this.user)
     });

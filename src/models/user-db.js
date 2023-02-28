@@ -35,6 +35,9 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    deleted: {
+      default: false,
+    },
     dateOfBirth: {
       type: Date,
       default: null,

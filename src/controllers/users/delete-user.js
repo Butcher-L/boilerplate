@@ -8,9 +8,9 @@ const deleteUserController = ({ deleteUserUseCase }) => {
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
           };          
-
+          const user = httpRequest.user
           const id = httpRequest.params.id
-          const fetched = await deleteUserUseCase(id);
+          const fetched = await deleteUserUseCase(id,user);
 
           return {
               headers: {

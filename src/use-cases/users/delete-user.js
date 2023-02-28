@@ -1,9 +1,24 @@
 const UserModel = require('../../models/user-db')
 
-const deleteUserUseCase = () => {
-  return async function get(id){
+const deleteUserUseCase = ({Role}) => {
+  return async function get(id,user){
+    if(user.role === Role.User){
+      throw new Error('No access to delete user')
+    }
 
-      return UserModel.deleteOne({_id: id})
+    await UserModel.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          deleted: true
+        }
+      })
+    
+    return {
+      msg: `User ${id} is deleted`,
+      id
+    };
+    
   };
 };
 

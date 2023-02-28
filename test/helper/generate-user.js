@@ -3,13 +3,13 @@ const { generateId, Prefix } = require('../../src/middlewares/generateId')
 
 const chance = new Chance()
 module.exports = {
-   generateUser() {
+   generateUser(role) {
     const id = generateId(Prefix.User);
     return {
       _id: id,
       firstname: chance.first(),
       lastname: chance.last(), 
-      role: "test",
+      role: role,
       username: chance.first(),
       password: chance.word(),
       email: chance.email(),

@@ -8,8 +8,8 @@ const addTransactionController = ({ addTransactionUseCase }) => {
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
           };          
-
-          const posted = await addTransactionUseCase(info);
+          const user = httpRequest.user
+          const posted = await addTransactionUseCase(info,user);
 
           return {
               headers: {

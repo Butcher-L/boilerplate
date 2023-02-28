@@ -20,7 +20,7 @@ async function verifyToken(req, res, next) {
     if (token.startsWith('Bearer ')) {
       token = token.slice(7, token.length);
     }
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
         console.log("Token Expired!")
 

@@ -8,9 +8,9 @@ const deleteTransactionController = ({ deleteTransactionUseCase }) => {
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
           };          
-
+          const user = httpRequest.user
           const id = httpRequest.params.id
-          const fetched = await deleteTransactionUseCase(id, info);
+          const fetched = await deleteTransactionUseCase(id, user);
 
           return {
               headers: {

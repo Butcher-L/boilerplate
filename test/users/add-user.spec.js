@@ -3,6 +3,7 @@ const {expect} = require('chai');
 const chaiHttp = require('chai-http');
 
 const UserModel = require('../../src/models/user-db');
+const { Role } = require('../../src/middlewares/types')
 const {generateUser} = require('../helper/generate-user')
 const server = require('../../src/index');
 
@@ -11,7 +12,8 @@ chai.use(chaiHttp);
 describe('Users', () => {
   describe('/POST ', () => {
     before(async function () { 
-        this.user = generateUser()
+        this.user = generateUser(Role.User)
+        this.user2 = generateUser(Role.User)
     });
     after(async function () {
         await UserModel.deleteMany({});
@@ -33,6 +35,19 @@ describe('Users', () => {
 
         expect(user.firstname).to.be.eqls(this.user.firstname)
         expect(user.lastname).to.be.eqls(this.user.lastname)
+    });
+
+    it('SHOULD give error ', async function (){
+      
+        const res =  await chai.request(server)
+            .post('/users/add-user')
+            .send({
+                ...this.user2,
+                username: this.user.username
+            })
+
+        expect(res.status).to.be.eqls(400)
+        expect(res.body.error).to.be.eqls(`Username already exists`)
     });
 
     it('SHOULD give error ', async function (){

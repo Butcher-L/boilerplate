@@ -5,6 +5,11 @@ const TransactionType = [
   'DONE'
 ]
 
+const RoleType = [
+  'ADMIN',
+  'USER',
+]
+
 const Transaction = {
   Todo: 'TODO',
   Inprogress: 'INPROGRESS',
@@ -12,4 +17,14 @@ const Transaction = {
   Done: 'DONE'
 }
 
-module.exports = { TransactionType, Transaction }
+const Role = {
+  Admin: 'ADMIN',
+  User: 'USER',
+}
+
+module.exports = { 
+  TransactionType, 
+  Transaction,
+  RoleType,
+  Role
+}

@@ -1,5 +1,5 @@
 const { generateId, Prefix } = require('../../middlewares/generateId')
-const { TransactionType, Transaction  } = require('../../middlewares/types') 
+const { TransactionType, Transaction, Role  } = require('../../middlewares/types') 
 
 const addTransaction = require('./add-transaction');
 const updateTransaction = require('./update-transaction')
@@ -7,11 +7,11 @@ const getTransaction = require('./get-transaction')
 const getTransactions = require('./get-transactions')
 const deleteTransaction = require("./delete-transaction")
 
-const addTransactionUseCase = addTransaction({ generateId, Prefix, Transaction});
-const updateTransactionUseCase =  updateTransaction({ TransactionType })
+const addTransactionUseCase = addTransaction({ generateId, Prefix, Transaction, Role});
+const updateTransactionUseCase =  updateTransaction({ TransactionType, Transaction })
 const getTransactionUseCase = getTransaction({})
 const getTransactionsUseCase = getTransactions({})
-const deleteTransactionUseCase = deleteTransaction({})
+const deleteTransactionUseCase = deleteTransaction({Role})
 
 
 const transactionService = Object.freeze({

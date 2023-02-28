@@ -12,14 +12,14 @@ const addUserUseCase = ({ encrypt, generateId , Prefix}) => {
 
         if(user){
             throw new Error('Account already exists')
-        }
+        }        
 
         const username = await UserModel.findOne({
             username : info.username,
         })
 
         if(username){
-            throw new Error('username already exists')
+            throw new Error('Username already exists')
         }
 
         const id = generateId(Prefix.User)
