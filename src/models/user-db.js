@@ -15,8 +15,66 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    middlename: {
+      type: String,
+    },
+    suffix: {
+      type: String,
+    },
     lastname: {
       type: String,
+      required: true,
+    },
+    fullname:{
+      type: String,
+      required: true,
+    },
+    active: {
+      type: Boolean,
+      default: true,
+    },
+    passwordHash: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    geolocation: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+    },
+    teams: {
+      type: [String],
+    },
+    jobRole: {
+      type: String,
+      required: true,
+    },
+    deployment: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    contract: {
+      type: String,
+      required: true,
+    },
+    contact: {
+      type: String,
+      required: true,
+    },
+    vaccine: {
+      type: String,
+    },
+    dateOfBirth: {
+      type: Date,
       required: true,
     },
     role: {
@@ -24,23 +82,15 @@ const schema = new Schema(
       required: true,
     },
     username: {
-        type: String,
-        required: true,
-      },
-    password: {
       type: String,
       required: true,
     },
-    email: {
+    userPolicy: {
       type: String,
-      required: true,
     },
     deleted: {
+      type: Boolean,
       default: false,
-    },
-    dateOfBirth: {
-      type: Date,
-      default: null,
     },
     dateTimeCreated: {
       type: Date,
@@ -55,7 +105,6 @@ const schema = new Schema(
   { toJSON, _id: false },
 );
 
-schema.index({ _id: 1 });
 schema.index({ firstname: 1, lastname: 1 });
 
 

@@ -10,9 +10,10 @@ const loginUseCase = ({ encrypt ,jwt }) => {
     if (!userExist){
         throw new Error('User does not exits')
     }
+
     const user = await UserModel.findOne({
         username : info.username,
-        password : encrypt(info.password)
+        passwordHash : encrypt(info.password)
     })
 
     if(!user){

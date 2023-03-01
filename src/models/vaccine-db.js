@@ -15,39 +15,36 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    name: {
-      type: String,
-      required: true,
-    },
-    status: {
+    vaccineType: {
       type: String,
     },
-    deleted: {
-      default: false,
-    },
-    dateTimeStarted: {
+    firstDoseDate: {
       type: Date,
-      default: null
     },
-    dateTimeCompleted: {
+    secondDoseDate: {
       type: Date,
-      default: null
     },
-    dateTimeCreated: {
+    thirdDoseDate: {
       type: Date,
-      required: true,
     },
-    dateTimeUpdated: {
-      type: Date,
-      required: true,
+    vaccineSite: {
+      type: String,
     },
-
+    vaccinationStatus: {
+      type: String,
+    },
+    boosterVaccine: {
+      type: String,
+    },
+    boosterStatus: {
+      type: String,
+    }, 
   },
   { toJSON, _id: false },
 );
 
-schema.index({ name: 1, user: 1 });
+schema.index({ user: 1 });
 
 
-module.exports = Mongoose.model('transaction', schema);
+module.exports = Mongoose.model('vaccine', schema);
 

@@ -8,6 +8,27 @@ const TransactionType = [
 const RoleType = [
   'ADMIN',
   'USER',
+  'SUPER ADMIN'
+]
+
+const JobRoleType = [
+  'NODE JS DEV',
+  'FRONTEND DEV',
+  'HR'
+]
+
+const VaccineType = [
+  'PFIZER',
+  'MODERNA',
+  'JANSSEN',
+  'SPUTNIK',
+  'ASTRAZENECA'
+]
+
+const VaccineStatusType = [
+  'UNVACCINATED',
+  'VACCINATED',
+  'FULLY VACCINATED',
 ]
 
 const Transaction = {
@@ -20,11 +41,39 @@ const Transaction = {
 const Role = {
   Admin: 'ADMIN',
   User: 'USER',
+  SuperAdmin: 'SUPER ADMIN'
 }
+
+const JobRole = {
+  NodeJsDev:'NODE JS DEV',
+  FronEndDev:'FRONTEND DEV',
+  Hr: 'HR'
+}
+
+const Vaccine = {
+  Pfizer: 'PFIZER',
+  Moderna: 'MODERNA',
+  Janssen: 'JANSSEN',
+  Sputnik: 'SPUTNIK',
+  AstraZeneca: 'ASTRAZENECA'
+}
+
+const VaccineStatus = {
+  Unvaccinated: 'UNVACCINATED',
+  Vaccinated: 'VACCINATED',
+  FullyVaccinated: 'FULLY VACCINATED',
+}
+
 
 module.exports = { 
   TransactionType, 
   Transaction,
   RoleType,
-  Role
+  Role,
+  JobRoleType,
+  JobRole,
+  VaccineType,
+  Vaccine,
+  VaccineStatusType,
+  VaccineStatus
 }

@@ -7,6 +7,9 @@ const { MongooseService } = require('./middlewares/mongo/mongoose');
 const loginRouter = require('./routes/api/login')
 const usersRouter = require('./routes/api/user');
 const transactionRouter = require('./routes/api/transactions')
+const archievedDocumentsRouter = require('./routes/api/services/archieved-documents')
+const employeeSelfServicesRouter = require('./routes/api/services/employee-self-service')
+const projectBillingsRouter = require('./routes/api/services/project-billing')
 
 const app = express();
 
@@ -19,6 +22,10 @@ app.use(cors());
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
 app.use('/transactions', transactionRouter);
+app.use('/archieved-documents', archievedDocumentsRouter)
+app.use('/employee-self-services', employeeSelfServicesRouter)
+app.use('/project-billings', projectBillingsRouter)
+
 
 const PORT = process.env.PORT || 3000;
 

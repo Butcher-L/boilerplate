@@ -15,39 +15,28 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    name: {
+    mobile: {
       type: String,
       required: true,
     },
-    status: {
+    viber: {
       type: String,
     },
-    deleted: {
-      default: false,
-    },
-    dateTimeStarted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCompleted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCreated: {
-      type: Date,
+    emergencyContactPerson: {
+      type: String,
       required: true,
     },
-    dateTimeUpdated: {
-      type: Date,
+    emergencyContactNumber: {
+      type: String,
       required: true,
     },
-
+    
   },
   { toJSON, _id: false },
 );
 
-schema.index({ name: 1, user: 1 });
+schema.index({ user: 1 });
 
 
-module.exports = Mongoose.model('transaction', schema);
+module.exports = Mongoose.model('contact', schema);
 

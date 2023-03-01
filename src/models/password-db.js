@@ -15,39 +15,30 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    name: {
+    password: {
       type: String,
       required: true,
     },
-    status: {
+    passwordHash: {
       type: String,
-    },
-    deleted: {
-      default: false,
-    },
-    dateTimeStarted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCompleted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCreated: {
-      type: Date,
       required: true,
     },
-    dateTimeUpdated: {
-      type: Date,
-      required: true,
+    lastChangePassword: {
+      type: String,
+      default: null,
     },
+    lastChangePasswordDate: {
+      type: Date,
+      default: null,
+    }
 
   },
   { toJSON, _id: false },
 );
 
-schema.index({ name: 1, user: 1 });
+
+schema.index({ user: 1 });
 
 
-module.exports = Mongoose.model('transaction', schema);
+module.exports = Mongoose.model('password', schema);
 

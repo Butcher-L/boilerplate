@@ -15,39 +15,33 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    name: {
-      type: String,
-      required: true,
-    },
-    status: {
+    building: {
       type: String,
     },
-    deleted: {
-      default: false,
+    stateDistrict: {
+      type: String,
     },
-    dateTimeStarted: {
-      type: Date,
-      default: null
+    street: {
+      type: String,
     },
-    dateTimeCompleted: {
-      type: Date,
-      default: null
+    city: {
+      type: String,
     },
-    dateTimeCreated: {
-      type: Date,
-      required: true,
+    province: {
+      type: String,
     },
-    dateTimeUpdated: {
-      type: Date,
-      required: true,
+    postCode: {
+      type: String,
     },
-
+    address: {
+      type: String,
+    }
   },
   { toJSON, _id: false },
 );
 
-schema.index({ name: 1, user: 1 });
+schema.index({ user: 1 });
 
 
-module.exports = Mongoose.model('transaction', schema);
+module.exports = Mongoose.model('address', schema);
 

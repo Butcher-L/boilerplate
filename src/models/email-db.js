@@ -15,39 +15,24 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    name: {
+    email: {
       type: String,
       required: true,
     },
-    status: {
+    qnxEmail: {
       type: String,
-    },
-    deleted: {
-      default: false,
-    },
-    dateTimeStarted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCompleted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCreated: {
-      type: Date,
       required: true,
     },
-    dateTimeUpdated: {
-      type: Date,
-      required: true,
+    clientEmail: {
+      type: [String],
     },
-
+    
   },
   { toJSON, _id: false },
 );
 
-schema.index({ name: 1, user: 1 });
+schema.index({ user: 1 });
 
 
-module.exports = Mongoose.model('transaction', schema);
+module.exports = Mongoose.model('email', schema);
 

@@ -15,39 +15,24 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    name: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-    },
-    deleted: {
-      default: false,
-    },
-    dateTimeStarted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCompleted: {
-      type: Date,
-      default: null
-    },
-    dateTimeCreated: {
+    startDate: {
       type: Date,
       required: true,
     },
-    dateTimeUpdated: {
+    contractExpirationDate: {
       type: Date,
       required: true,
     },
-
+    regularizationDate: {
+      type: Date,
+    },
+    
   },
   { toJSON, _id: false },
 );
 
-schema.index({ name: 1, user: 1 });
+schema.index({ user: 1 });
 
 
-module.exports = Mongoose.model('transaction', schema);
+module.exports = Mongoose.model('contract', schema);
 
