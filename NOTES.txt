@@ -1,0 +1,90 @@
+## ADD USER
+{
+	"firstname": "admin",
+	"lastname": "admin",
+	"role": "ADMIN",
+	"username":"admin",
+	"password":"admin",
+	"email": {
+		"email":"test@getnada.com",
+		"qnxEmail": "test@getnada.com",
+		"clientEmail" : "ubtes@getnada.com"
+	},
+	"address": {
+		"street":"Brgy Alegria",
+		"stateDistrict" : "Alabel",
+		"province":"Sarangani",
+		"postCode" : 9501
+	},
+	"dateOfBirth": "2023-02-21",
+	"contract": {
+		"startDate": "2023-02-21",
+		"contractExpirationDate": "2024-02-21"
+	},
+	"contact": {
+		"mobile": "09168719864",
+		"emergencyContactPerson": "butch test",
+		"emergencyContactNumber": "1-029318249080"
+	},
+	"geolocation":{
+		"pin": "6.126024,125.1909797",
+		"gmapAddressLink": "https://www.google.com/maps/place/Aj+%26+Aira+Store/@6.126024,125.1909797,21z/data=!4m6!3m5!1s0x32f79e4ad1c2c4a3:0x5c663741ebd7be8f!8m2!3d6.1259991!4d125.1907432!16s%2Fg%2F11clyx8vlv"
+	},
+	"vaccine":{
+		"vaccineType": "PFIZER",
+		"firstDoseDate": "2024-02-21",
+		"secondDoseDate": "2024-02-21",
+		"thirdDoseDate": "2024-02-21",
+		"vaccineSite": "Brgy Alegria",
+		"vaccinationStatus": "FULLY VACCINATED",
+		"boosterVaccine": "PFIZER",
+		"boosterStatus": "FULLY VACCINATED"
+	},
+	"jobRole": "HR"
+}
+
+## UPDATE USER
+{
+	"firstname": "admin",
+	"lastname": "admin",
+	"role": "ADMIN",
+	"username":"admin",
+	"password":"admin",
+	"email": {
+		"email":"test@getnada.com",
+		"qnxEmail": "test@getnada.com",
+		"clientEmail" : "ubtes@getnada.com"
+	},
+	"address": {
+		"street":"Brgy Alegria",
+		"stateDistrict" : "Alabel",
+		"province":"Sarangani",
+		"postCode" : 9501
+	},
+	"dateOfBirth": "2023-02-21",
+	"contract": {
+		"startDate": "2023-02-21",
+		"contractExpirationDate": "2024-02-21"
+	},
+	"contact": {
+		"mobile": "09168719864",
+		"emergencyContactPerson": "butch test",
+		"emergencyContactNumber": "1-029318249080"
+	},
+	"geolocation":{
+		"pin": "6.126024,125.1909797",
+		"gmapAddressLink": "https://www.google.com/maps/place/Aj+%26+Aira+Store/@6.126024,125.1909797,21z/data=!4m6!3m5!1s0x32f79e4ad1c2c4a3:0x5c663741ebd7be8f!8m2!3d6.1259991!4d125.1907432!16s%2Fg%2F11clyx8vlv"
+	},
+	"vaccine":{
+		"vaccineType": "PFIZER",
+		"firstDoseDate": "2024-02-21",
+		"secondDoseDate": "2024-02-21",
+		"thirdDoseDate": "2024-02-21",
+		"vaccineSite": "Brgy Alegria",
+		"vaccinationStatus": "FULLY VACCINATED",
+		"boosterVaccine": "PFIZER",
+		"boosterStatus": "FULLY VACCINATED"
+	},
+	"jobRole": "HR",
+  "userPolicy": "usp_306287874eb043f59c095adb9014e720"
+}

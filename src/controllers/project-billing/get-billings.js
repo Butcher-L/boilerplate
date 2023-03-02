@@ -1,3 +1,5 @@
+const R = require('ramda')
+
 const getBillingsController = ({ getBillingsUseCase }) => {
   return async function get(httpRequest){
       try{
@@ -9,7 +11,13 @@ const getBillingsController = ({ getBillingsUseCase }) => {
               source.referrer = httpRequest.headers["Referrer"];
           };
 
-          const fetched = await getBillingsUseCase(info);
+          const { userPolicy } = httpRequest.user
+
+          if(!R.includes('project-billing', userPolicy.module)){
+            throw new Error('Not authorize to access this module')
+          }
+
+          const fetched = await getBillingsUseCase();
 
           return {
               headers: {
@@ -27,7 +35,7 @@ const getBillingsController = ({ getBillingsUseCase }) => {
           headers: {
               "Content-Type": "application/json"
           },
-          statusCode: 400,
+          statusCode: 403,
           body: {
               error: err.message
           }

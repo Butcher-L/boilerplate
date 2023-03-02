@@ -1,8 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const { verifyToken } = require('../../../middlewares/token')
+
 const { ExpressCallback } = require('../../../middlewares/express-callback');
 const { getBillingsController } = require('../../../controllers/project-billing');
 
-router.get('/',ExpressCallback(getBillingsController));
+const router = express.Router();
+
+router.get('/', verifyToken, ExpressCallback(getBillingsController));
 
 module.exports = router;

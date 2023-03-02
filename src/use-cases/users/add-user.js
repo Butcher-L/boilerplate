@@ -38,7 +38,8 @@ const addUserUseCase = ({ encrypt, generateId , Prefix, JobRoleType, VaccineType
             user: userId,
             password: info.password,
             passwordHash: encrypt(info.password),
-            username: info.username 
+            lastChangePassword: info.password,
+            lastChangePasswordDate:  Date.now(),
         })
 
         if(!password){

@@ -1,5 +1,5 @@
 const getSelfServicesUseCase = ({}) => {
-  return async function get(info){
+  return async function get(){
     return {
       msg: `Welcome to Employee Self Service`,
     }

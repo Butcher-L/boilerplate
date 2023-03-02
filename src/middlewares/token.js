@@ -24,7 +24,7 @@ async function verifyToken(req, res, next) {
       if (err) {
         console.log("Token Expired!")
 
-        return res.status(200).json({
+        return res.status(401).json({
           success: false,
           message: 'Token is not valid',
           error: err.toString()
@@ -35,9 +35,9 @@ async function verifyToken(req, res, next) {
       }
     });
   } else {
-    return res.status(200).json({
+    return res.status(401).json({
       success: false,
-      message: 'Auth token is not supplied'
+      message: 'Token is not supplied'
     });
   }
 }

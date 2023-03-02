@@ -1,7 +1,8 @@
+const R = require('ramda')
+
 const getDocumentsController = ({ getDocumentsUseCase }) => {
   return async function get(httpRequest){
       try{
-        console.log("CONTROLLER")
           const {source = {}, ...info} = httpRequest.body;
           source.ip = httpRequest.ip;
           source.browser = httpRequest.headers["User-Agent"];
@@ -9,6 +10,13 @@ const getDocumentsController = ({ getDocumentsUseCase }) => {
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
           };
+
+          const { userPolicy } = httpRequest.user
+
+          if(!R.includes('archieved-documents', userPolicy.module)){
+            throw new Error('Not authorize to access this module')
+          }
+
           const fetched = await getDocumentsUseCase();
 
           return {
@@ -27,7 +35,7 @@ const getDocumentsController = ({ getDocumentsUseCase }) => {
           headers: {
               "Content-Type": "application/json"
           },
-          statusCode: 400,
+          statusCode: 403,
           body: {
               error: err.message
           }

@@ -25,11 +25,9 @@ const schema = new Schema(
     },
     lastChangePassword: {
       type: String,
-      default: null,
     },
     lastChangePasswordDate: {
       type: Date,
-      default: null,
     }
 
   },

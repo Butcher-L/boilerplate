@@ -22,7 +22,12 @@ const addUserUseCase = addUser({
     VaccineStatusType 
 });
 const getUsersUseCase = getUsers({ Role });
-const updateUserUseCase = updateUser({encrypt});
+const updateUserUseCase = updateUser({ 
+    encrypt ,
+    JobRoleType, 
+    VaccineType, 
+    VaccineStatusType 
+});
 const getUserUseCase = getUser();
 const deleteUserUseCase = deleteUser({ Role });
 

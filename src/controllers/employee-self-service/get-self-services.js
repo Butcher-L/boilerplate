@@ -1,3 +1,5 @@
+const R = require('ramda')
+
 const getSelfServicesController = ({ getSelfServicesUseCase }) => {
   return async function get(httpRequest){
       try{
@@ -8,8 +10,14 @@ const getSelfServicesController = ({ getSelfServicesUseCase }) => {
           if(httpRequest.headers["Referrer"]){
               source.referrer = httpRequest.headers["Referrer"];
           };
-          const SessionId = httpRequest.headers["SessionId"];
-          const fetched = await getSelfServicesUseCase(info,SessionId);
+
+          const { userPolicy } = httpRequest.user
+
+          if(!R.includes('employee-self-service', userPolicy.module)){
+            throw new Error('Not authorize to access this module')
+          }
+
+          const fetched = await getSelfServicesUseCase();
 
           return {
               headers: {
@@ -27,7 +35,7 @@ const getSelfServicesController = ({ getSelfServicesUseCase }) => {
           headers: {
               "Content-Type": "application/json"
           },
-          statusCode: 400,
+          statusCode: 403,
           body: {
               error: err.message
           }

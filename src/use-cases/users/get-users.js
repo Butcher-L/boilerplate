@@ -7,6 +7,7 @@ const EmailModel = require('../../models/email-db')
 const ContractModel = require('../../models/contract-db')
 const ContactModel = require('../../models/contact-db')
 const VaccineModel = require('../../models/vaccine-db')
+const UserPolicyModel = require('../../models/user-policy-db')
 
 const getUsersUseCase = () => {
   return async function getAll(info){
@@ -33,6 +34,11 @@ const getUsersUseCase = () => {
             vaccine = await VaccineModel.findById(user.vaccine)
           }
 
+          let userPolicy
+          if(user.userPolicy){
+            userPolicy = await UserPolicyModel.findById(user.userPolicy)
+          }
+
           return {
             ...R.omit(['passwordHash','__v'],(user.toJSON())),
             password:R.pick(['lastChangePassword','lastChangePasswordDate'], password),
@@ -46,7 +52,11 @@ const getUsersUseCase = () => {
               ? {vaccine: R.omit(['_id','user','__v'], (vaccine.toJSON()))}  
               : {}
             ),
-
+            ...( 
+              !R.isNil(userPolicy) 
+              ? {userPolicy: R.omit(['_id','__v'], (userPolicy.toJSON()))}  
+              : {}
+            ),
           }
         },users)
       )
