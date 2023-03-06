@@ -31,6 +31,13 @@ const VaccineStatusType = [
   'FULLY VACCINATED',
 ]
 
+const TeamsType = [
+  'TEAM A',
+  'TEAM B',
+  'TEAM C',
+  'TEAM D',
+]
+
 const Transaction = {
   Todo: 'TODO',
   Inprogress: 'INPROGRESS',
@@ -64,6 +71,13 @@ const VaccineStatus = {
   FullyVaccinated: 'FULLY VACCINATED',
 }
 
+const Teams = {
+  TeamA: 'TEAM A',
+  TeamB: 'TEAM B',
+  TeamC: 'TEAM C',
+  TeamD: 'TEAM D',
+}
+
 
 module.exports = { 
   TransactionType, 
@@ -75,5 +89,7 @@ module.exports = {
   VaccineType,
   Vaccine,
   VaccineStatusType,
-  VaccineStatus
+  VaccineStatus,
+  TeamsType,
+  Teams
 }

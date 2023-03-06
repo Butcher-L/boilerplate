@@ -9,7 +9,13 @@ const ContactModel = require('../../models/contact-db')
 const VaccineModel = require('../../models/vaccine-db')
 const UserPolicyModel = require('../../models/user-policy-db')
 
-const updateUserUseCase = ({encrypt}) => {
+const updateUserUseCase = ({
+  encrypt,
+  JobRoleType, 
+  VaccineType, 
+  VaccineStatusType,
+  TeamsType
+}) => {
   return async function add(id,info){
 
     const userExists = await UserModel.findOne({_id: id})
@@ -41,10 +47,8 @@ const updateUserUseCase = ({encrypt}) => {
     }
 
     if(info.userPolicy){
-      console.log("WTF")
       const policy = await UserPolicyModel.findOne({_id: info.userPolicy })
       
-      console.log(policy)
       if(!policy){
         throw new Error('Policy is Invalid')
       }
@@ -134,6 +138,16 @@ const updateUserUseCase = ({encrypt}) => {
             { $set: info.vaccine },
             { returnOriginal: false }
           )
+    }
+
+    if(info.teams){
+      for ( team of info.teams){
+        const validTeam = R.includes(team, TeamsType)
+
+        if(!validTeam){
+          throw new Error(`${team} is Invalid Team`)
+        }
+      }
     }
 
     const data = {

@@ -4,7 +4,8 @@ const {
     Role, 
     JobRoleType, 
     VaccineType, 
-    VaccineStatusType 
+    VaccineStatusType,
+    TeamsType
 } = require('../../middlewares/types')
 
 const addUser = require('./add-user');
@@ -26,7 +27,8 @@ const updateUserUseCase = updateUser({
     encrypt ,
     JobRoleType, 
     VaccineType, 
-    VaccineStatusType 
+    VaccineStatusType,
+    TeamsType
 });
 const getUserUseCase = getUser();
 const deleteUserUseCase = deleteUser({ Role });

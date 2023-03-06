@@ -11,7 +11,15 @@ const { Rollback } = require('../../middlewares/rollback')
 
 const { makeUser } = require("../../entities/users")
 
-const addUserUseCase = ({ encrypt, generateId , Prefix, JobRoleType, VaccineType, VaccineStatusType}) => {
+const addUserUseCase = ({ 
+    encrypt, 
+    generateId , 
+    Prefix, 
+    JobRoleType, 
+    VaccineType, 
+    VaccineStatusType,
+    TeamsType
+}) => {
     return async function add(info){
         const userEntity = makeUser(info);       
 
@@ -30,6 +38,16 @@ const addUserUseCase = ({ encrypt, generateId , Prefix, JobRoleType, VaccineType
               throw new Error('Invalid Job Role')
             }
         }
+
+        if(info.teams){
+            for ( team of info.teams){
+              const validTeam = R.includes(team, TeamsType)
+      
+              if(!validTeam){
+                throw new Error(`${team} is Invalid Team`)
+              }
+            }
+          }
 
         const userId = generateId(Prefix.User)
 

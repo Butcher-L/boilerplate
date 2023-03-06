@@ -12,7 +12,7 @@ async function generateToken(user) {
         _id: user._id,
         role: user.role,
         userPolicy: R.omit(['_id','__v'], (policy.toJSON())),
-    }, process.env.SECRET,{ expiresIn: '10s' });
+    }, process.env.SECRET,{ expiresIn: '1h' });
 }
 
 
